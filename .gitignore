@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+dist-ssr/
+build/
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# logs
+*.log
+npm-debug.log*
+
+# editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# typescript build info
+*.tsbuildinfo
+
+# cache
+.cache/
+.parcel-cache/
+node_modules/
+dist/
+.env
+*.local
