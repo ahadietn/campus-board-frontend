@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(${BASE}/auth/me, { credentials: "include" })
+    fetch(`${BASE}/auth/me`, { credentials: "include" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         setUser(data);

@@ -26,7 +26,7 @@ export default function Signup() {
       return;
     }
     setLoading(true);
-    const res = await fetch(${BASE}/auth/signup, {
+    const res = await fetch(`${BASE}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
