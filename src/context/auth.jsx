@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
+const BASE = import.meta.env.VITE_API_URL || "/api";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
@@ -7,7 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/auth/me", { credentials: "include" })
+    fetch(${BASE}/auth/me, { credentials: "include" })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
         setUser(data);

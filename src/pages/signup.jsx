@@ -5,6 +5,8 @@ import { Layout } from "@/components/layout";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
 
+const BASE = import.meta.env.VITE_API_URL || "/api";
+
 export default function Signup() {
   const [, setLocation] = useLocation();
   const { setUser } = useAuth();
@@ -19,29 +21,23 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-
     if (form.password.length < 6) {
       setError("Password must be at least 6 characters");
       return;
     }
-
     setLoading(true);
-
-    const res = await fetch("/api/auth/signup", {
+    const res = await fetch(${BASE}/auth/signup, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify(form),
     });
-
     setLoading(false);
     const data = await res.json().catch(() => ({}));
-
     if (!res.ok) {
       setError(data.error || "Signup failed. Please try again.");
       return;
     }
-
     setUser(data);
     setLocation("/");
   }
@@ -53,13 +49,11 @@ export default function Signup() {
           <h1 className="text-3xl font-bold text-gray-900">Create your account</h1>
           <p className="text-gray-500 text-sm mt-1">Join Campus Board to post and connect</p>
         </div>
-
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 mb-5 text-sm">
             {error}
           </div>
         )}
-
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="name">Name</Label>
@@ -73,7 +67,6 @@ export default function Signup() {
               className="rounded-xl"
             />
           </div>
-
           <div className="space-y-1.5">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -86,7 +79,6 @@ export default function Signup() {
               className="rounded-xl"
             />
           </div>
-
           <div className="space-y-1.5">
             <Label htmlFor="password">Password</Label>
             <Input
@@ -99,7 +91,6 @@ export default function Signup() {
               className="rounded-xl"
             />
           </div>
-
           <button
             type="submit"
             disabled={loading}
@@ -108,7 +99,6 @@ export default function Signup() {
             {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
-
         <p className="text-sm text-gray-500 mt-6 text-center">
           Already have an account?{" "}
           <Link href="/login" className="text-green-600 font-medium hover:underline">
